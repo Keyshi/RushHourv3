@@ -1,4 +1,4 @@
-
+package rush.hour;
 /**
 * ParkingController est la classe qui gère les collisions entre véhicules.
 *

@@ -1,4 +1,4 @@
-
+package rush.hour;
 /**
 * RushHour 2 est la classe permettant de tester le projet RushHour
 *

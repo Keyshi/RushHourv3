@@ -1,4 +1,4 @@
-
+package rush.hour;
 /**
  * A set of constants used in the RushHour program.
  */

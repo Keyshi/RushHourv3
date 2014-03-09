@@ -1,4 +1,4 @@
-
+package rush.hour;
 import java.awt.Point;
 /** Technic Slot Class, the cartesian coordinates of the playfield
  *

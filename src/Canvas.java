@@ -1,4 +1,4 @@
-
+package rush.hour;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;

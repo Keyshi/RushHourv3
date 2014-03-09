@@ -1,4 +1,4 @@
-
+package rush.hour;
 /**
  * A public Class generating and displaying the boardgame
  *
