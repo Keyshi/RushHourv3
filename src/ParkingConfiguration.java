@@ -2,14 +2,21 @@ package rush.hour;
 
 import java.util.ArrayList;
 
+/**
+ * ParkingConfiguration represents the configuaration of a parking
+ * @author Xavier Leblond, Kevin Meyer, Raphaël Voirin, Meryem Fourkane.
+ * @version 2014.03.09
+ */
 public class ParkingConfiguration {
-
-    private int levelNumber;
-    private Parking p;
+   
+   // The level number of the parking configuration.
+   private int levelNumber;
+   // Reference on the Parking.
+   private Parking p;
 
     /**
      * A constructor for the first level parking configuration
-     * @param p 
+     * @param p a parking object
      */
     public ParkingConfiguration (Parking p) {
         this.levelNumber = 0;
@@ -17,13 +24,13 @@ public class ParkingConfiguration {
     }
     /**
      * A constructor for the parking configuration with a level>0
-     * @param p
-     * @param move
-     * @param lvl 
+     * @param p a parking object
+     * @param move the movement 
+     * @param lvl the level number of this configuration.
      */
     public ParkingConfiguration (Parking p, String move, int lvl) {
         this.levelNumber = lvl;
-        this.p=p;
+        this.p = p;
         p.move(move);
     }
 
@@ -101,7 +108,7 @@ public class ParkingConfiguration {
      */
     public Parking getParking()
     {
-        return p;
+        return this.p;
     };
 
 }
