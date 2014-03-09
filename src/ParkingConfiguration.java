@@ -1,3 +1,7 @@
+package rush.hour;
+
+import java.util.ArrayList;
+
 public class ParkingConfiguration {
 
    private int levelNumber;
@@ -7,6 +11,12 @@ public class ParkingConfiguration {
       this.levelNumber = 0;
       this.p = p;
    }
+   
+   public ParkingConfiguration (Parking p, String move, int lvl) {
+      this.levelNumber = lvl;
+      this.p=p;
+      p.move(move);
+   }
 
    /**
     * Gives all the possible moves of a vehicule.
@@ -15,27 +25,45 @@ public class ParkingConfiguration {
     */
    public ArrayList<String> getAllMoves(Vehicule v)
    {
-      ArrayList<String> possibleMove;
-      String direction = v.getDir();
+      ArrayList<String> possibleMove = new ArrayList();
       String name = v.getNom();
-      int distance = 0;
-      String[] direction = {"L","R","U","D"};
-      for (int i = 0 ; i < direction.length ; i++) {
-         do {
-            distance = 1;
-            // TODO : Instancier ParkingController
-            isMovePossible = verifDeplacement(v, direction[i], distance);
-            if (isMovePossible == true) {
-               possibleMove.add(name + direction[i] + distance);
+      int distance;
+      boolean isMovePossible;
+      String[] sens = {"L","R","U","D"};
+      ParkingController pc=p.getParkingController();
+      for (int i = 0 ; i < sens.length ; i++) {
+          distance=1;
+          do {
+            isMovePossible = pc.verifDeplacement(v, sens[i], distance);
+            if (isMovePossible) {
+               possibleMove.add(name + sens[i] + distance);
             }
             distance++;
-         } while (isMovePossible == true);
+         } while (isMovePossible);
       }
       return possibleMove;
    }
+   
+   
+   /**  
+    * Gives all the possibles moves on the parking
+    * @return the list of all vehicles possible moves
+    */
+   public ArrayList<String> getAllVehiclesMoves ()
+   {
+       ArrayList<Vehicule> vehicles = p.getListe_vehicules();
+       ArrayList<String> possibleMove = new ArrayList();
+       for (int i=0; i< vehicles.size(); i++)
+       {
+           possibleMove.addAll(getAllMoves(vehicles.get(i)));
+       }
+       return possibleMove;
+   }
 
 
-   public void getParking()
-   {};
+   public Parking getParking()
+   {
+       return p;
+   };
 
 }
