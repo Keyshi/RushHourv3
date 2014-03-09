@@ -46,6 +46,7 @@ public class IHM extends JFrame{
 	private JFormattedTextField commande;
 	private JLabel label;
 	private JButton valider;
+        private JButton help;
 	private JTextArea saisies;
 	
 	
@@ -130,11 +131,13 @@ public class IHM extends JFrame{
 		saisies.setFont(new Font("Arial", Font.BOLD, 11));
 		/*saisies.setWrapStyleWord(true); //ne fonctionne pas*/
 		valider = new JButton("Valider");
+                help = new JButton("Help?");
 		label = new JLabel ("Déplacement : ");
 		
 		JPanel corps = new JPanel(new GridLayout(0,1,0,5));
 		JPanel corpsHaut = new JPanel(new GridLayout(0,1,0,5));
 		JPanel corpsHautHaut = new JPanel();
+                JPanel corpsHautCentre = new JPanel();
 		JPanel corpsHautBas = new JPanel();
 		
 		corps.setBackground(Color.WHITE);
@@ -144,9 +147,11 @@ public class IHM extends JFrame{
 		
 		corpsHautHaut.add(label);
 		corpsHautHaut.add(commande);
-		corpsHautBas.add(valider);
+		corpsHautCentre.add(valider);
+                corpsHautBas.add(help);
 		
 		corpsHaut.add(corpsHautHaut);
+                corpsHaut.add(corpsHautCentre);
 		corpsHaut.add(corpsHautBas);
 		
 		corps.add(corpsHaut);
@@ -178,6 +183,7 @@ public class IHM extends JFrame{
 		itemNewGame.addActionListener(new BouttonsCtrl (Constants.NEWGAME));
 		itemSave.addActionListener(new BouttonsCtrl (Constants.SAVE));
 		valider.addActionListener(new BouttonsCtrl (Constants.VALIDER));
+                help.addActionListener(new BouttonsCtrl (Constants.HELP));
 	}
 
 	/** Modifie le panel central de l'IHM

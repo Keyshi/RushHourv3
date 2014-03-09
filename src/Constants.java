@@ -26,6 +26,7 @@ public interface Constants {
 	public static final int NEWGAME = 2;
 	public static final int SAVE = 3;
 	public static final int VALIDER = 4;
+        public static final int HELP = 5;
 	
 	//nom des lvl
 	public static final String [] levels = {"1-beginner", "2-intermediate", "3-advanced", "4-expert", "5-grandmaster"};
