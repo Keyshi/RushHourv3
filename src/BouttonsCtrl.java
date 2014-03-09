@@ -176,6 +176,11 @@ public class BouttonsCtrl implements ActionListener {
 				};
 				t.start();
 				break;
+                        
+                        // Add: Réaction au clic sur le bouton "HELP".
+                        case Constants.HELP:
+                                JOptionPane.showMessageDialog(null, "Not implemented");
+                                break;
 		}
 		
 	}
