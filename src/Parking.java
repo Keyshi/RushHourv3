@@ -1,4 +1,4 @@
-
+package rush.hour;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -119,4 +119,22 @@ public class Parking{
 	public void victory(){
 		this.victoire = true;
 	}
+        
+        /**
+         * A method used in the ParkingConfiguration class in order to control the possible moves of a vehicle
+         * @return the ParkingControleur
+         */
+        public ParkingController getParkingController ()
+        {
+            return pc;
+        }
+        
+        /**
+         * A method used in the ParkingConfiguration class in order to control the possible moves on the parking
+         * @return the list of the vehicles on the parking
+         */
+        public ArrayList<Vehicule> getListe_vehicules ()
+        {
+            return liste_vehicules;
+        }
 }
