@@ -1,3 +1,4 @@
+package rush.hour;
 
 import java.awt.Point;
 
