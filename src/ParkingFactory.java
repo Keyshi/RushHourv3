@@ -175,4 +175,9 @@ public class ParkingFactory{
 	public void victory(){
 		p.victory();
 	}
+        
+        public Parking getParking ()
+        {
+            return p;
+        }
 }
