@@ -67,7 +67,7 @@ public class ParkingConfiguration {
      */
     public ArrayList<String> getAllVehiclesMoves ()
     {
-        ArrayList<Vehicule> vehicles = p.getListe_vehicules();
+        ArrayList<Vehicule> vehicles =  new ArrayList(p.getListe_vehicules());
         ArrayList<String> possibleMove = new ArrayList();
         for (int i=0; i< vehicles.size(); i++)
         {
@@ -94,7 +94,7 @@ public class ParkingConfiguration {
     public ArrayList<ParkingConfiguration> generateAllPossibleConfig ()
     {
         ArrayList<ParkingConfiguration> newcfg= new ArrayList();
-        ArrayList<String> possibleMoves = getAllVehiclesMoves ();
+        ArrayList<String> possibleMoves = new ArrayList(getAllVehiclesMoves ());
         for (int i=0; i< possibleMoves.size(); i++)
         {
             newcfg.add(generateConfig(possibleMoves.get(i)));
@@ -110,5 +110,10 @@ public class ParkingConfiguration {
     {
         return this.p;
     };
+    
+    public boolean equals (ParkingConfiguration pc)
+    {
+        return (p==pc.p);
+    }
 
 }

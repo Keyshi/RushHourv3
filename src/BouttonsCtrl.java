@@ -177,10 +177,12 @@ public class BouttonsCtrl implements ActionListener {
 				t.start();
 				break;
                         
-                        // Add: Réaction au clic sur le bouton "HELP".
+                            
+                        //réaction au clic sur le bouton du solveur
                         case Constants.HELP:
-                                JOptionPane.showMessageDialog(null, "Not implemented");
-                                break;
+                            ParkingResolver solveur=new ParkingResolver(ParkingFactory.getParkFactor().getParking());
+                            solveur.playSolution();
+                            break;
 		}
 		
 	}
