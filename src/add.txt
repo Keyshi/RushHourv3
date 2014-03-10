@@ -1,6 +1,0 @@
-Classe Parking:
-2 getter: 1 pour le ParkingController et un pour la liste des Vehicules
-
-Classe ParkingConfiguration:
-J'ai corrige quelques erreurs dans la methode getAllMoves et j'ai créé la méthode getAllVehiclesMoves qui liste tous les mouvements possibles sur le parking.
-J'ai aussi rajouté un second constructeur qui sera utile pour les configurations de niveau>0.

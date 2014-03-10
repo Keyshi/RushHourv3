@@ -1,5 +1,4 @@
 package rush.hour;
-
 import java.awt.Point;
 
 /** the vehicule Class, containing all the settings for the Vehicules

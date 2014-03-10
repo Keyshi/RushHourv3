@@ -1,6 +1,11 @@
 package rush.hour;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * ParkingConfiguration represents the configuaration of a parking
@@ -11,7 +16,9 @@ public class ParkingConfiguration {
    
    // The level number of the parking configuration.
    private int levelNumber;
-   // Reference on the Parking.
+   // The array that includes the configuration of the parking an the moves done
+   private String [] config;
+   // The parking associated with the configuration
    private Parking p;
 
     /**
@@ -19,19 +26,51 @@ public class ParkingConfiguration {
      * @param p a parking object
      */
     public ParkingConfiguration (Parking p) {
+        this.p=p;
         this.levelNumber = 0;
-        this.p = p;
+        config=new String[2];
+        config[0]=config[1]="";
+        for (int i=0; i<p.getListe_vehicules().size(); i++)
+        {
+            String vehicule=new String();
+            Vehicule vehicle=p.getListe_vehicules().get(i);
+            vehicule += vehicle.getNom() + vehicle.getDir() + (vehicle.getPosX()-Constants.BORDER)/Constants.SQUARE + "" + (vehicle.getPosY()-Constants.BORDER)/Constants.SQUARE + "";
+            config [0] += vehicule + " ";
+        }
     }
     /**
      * A constructor for the parking configuration with a level>0
-     * @param p a parking object
+     * @param pc a parking configuration object
      * @param move the movement 
-     * @param lvl the level number of this configuration.
      */
-    public ParkingConfiguration (Parking p, String move, int lvl) {
-        this.levelNumber = lvl;
-        this.p = p;
-        p.move(move);
+    public ParkingConfiguration (ParkingConfiguration pc, String move) {
+        this.levelNumber = pc.levelNumber+1;
+        this.config=pc.config;
+        this.config[1] += move + " ";
+        int index=0;
+        do{
+            String temp=config[0].substring(index);
+            index=config[0].indexOf(move.substring(0,1));
+        }while(index%4!=0);
+        int newX=(int)(config[0].charAt(index+2));
+        int newY=(int)(config[0].charAt(index+3));
+        switch (move.charAt(1))
+        {
+            case 'D':
+                newY += (int)move.charAt(2);
+                break;
+            case 'U':
+                newY -= (int)move.charAt(2);
+                break;
+            case 'R':
+                newX += (int)move.charAt(2);
+                break;
+            case 'L':
+                newX -= (int)move.charAt(2);
+                break;
+        }
+        config[0].replace(config[0].substring(index+2,index+4), newX+""+newY+"");
+        this.p=getParking();
     }
 
     /**
@@ -83,7 +122,7 @@ public class ParkingConfiguration {
      */
     public ParkingConfiguration generateConfig (String move)
     {
-        ParkingConfiguration newcfg= new ParkingConfiguration (p, move, levelNumber+1);
+        ParkingConfiguration newcfg= new ParkingConfiguration (this, move);
         return newcfg;
     }
 
@@ -108,12 +147,56 @@ public class ParkingConfiguration {
      */
     public Parking getParking()
     {
+        this.p = new Parking ();
+        Hashtable <String, String[]>vehicles  = new Hashtable < String, String []> ();
+        try {	FileReader reader = new FileReader ("../data/vehicles.dat");
+            Scanner in = new Scanner (reader);
+            while (in.hasNextLine()){
+		String tmp= in.nextLine();
+		String [] tab = new String [2];
+		tab [0] = tmp.substring(1, 2);
+		tab [1] =tmp.substring(2);
+                vehicles.put (tmp.substring(0, 1), tab);
+            }
+        }catch(FileNotFoundException e) {}
+	String [] vehicules = config[0].split(" ");
+	for(int i = 0; i<vehicules.length; i++){
+            String [] tmp = vehicles.get(vehicules[i].substring(0, 1));
+            p.add(new Vehicule(	vehicules[i].charAt(0),     //char nom
+            Integer.parseInt(tmp[0]),     //int longueur
+            vehicules[i].substring(1, 2),     //String direction
+            new Slot(Integer.parseInt(vehicules[i].substring(2, 3)),Integer.parseInt(vehicules[i].substring(3))),     // Slot position
+            tmp[1]));     //String couleur
+	}
         return this.p;
     };
     
+    /**
+     * Method that gives the level of the config
+     * @return level of the config
+     */
+    public int getlevel ()
+    {
+        return this.levelNumber;
+    }
+    
+    /**
+     * Method that returns the array config
+     * @return array config 
+     */
+    public String [] getConfig()
+    {
+        return config;
+    }
+    
+    /**
+     * Method that tests if two configurations have the same parking
+     * @param pc a parking configuration
+     * @return true if they have the same parking
+     */
     public boolean equals (ParkingConfiguration pc)
     {
-        return (p==pc.p);
+        return (this.config==pc.config);
     }
 
 }
